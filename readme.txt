@@ -8,6 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 This plugin adds an accessible Twitter feed widget, compliant with WCAG 2, requires PHP5.
+
 == Description ==
 
 A widget with an accessible Twitter feed. Validates for WCAG 2.0. This plugin requires PHP5.

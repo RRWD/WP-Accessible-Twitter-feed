@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name: WP Accessible Twitter Feed
- * Plugin URI: http://wp-accessible.org
  * Description: This plugin adds an accessible Twitter feed widget compiant with WCAG 2.
  *
  * Version: 1.1
@@ -38,7 +37,7 @@ define( 'WPACC_FILE', __FILE__ );
 /** Include language files */
 load_plugin_textdomain( 'wpacc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-define( 'WPACC_VERSION', '1.0' );
+define( 'WPACC_VERSION', '1.1' );
 
 /** Load the Library */
 require WPACC_PATH.'lib/init.php';
