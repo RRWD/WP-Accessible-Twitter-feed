@@ -3,26 +3,6 @@
  * WP Accessible Twitter feed
  * Description: A widget with an Accessible twitter feed, based on the native Genesis Framework Widget by StudioPress. Works without Genesis Framework. Validates for WCAG 2.0
  *
- * Version 1.1
- * - Removed deprecated PHP style constructor
- *
- * Version 1.0
- * - Fixed bug Undefined index: twitter_duration
- * - Fixed bug Undefined index: twitter_include_rts
- *
- * Version 0.2
- * - added Twitter API 1.1 authentication, using oAuth Twitter Feed for Developers by Storm Consultancy (Liam Gladdy) and the OAuth lib. You can find that at http://oauth.net
- * - added time posted of the tweet
- *
- * Version 0.1 Changes made to Genesis_Latest_Tweets_Widget version 0.1.8 with the 1.8.2 framework:
- * - stand alone widget
- * - included function genesis_tweet_linkify, renamed it wp_accessible_tweet_linkify
- * - removed target is _blank for links, so they don't open in a new window
- * - removed title attribute in links (messes up screan reader output)
- * - removed links on hashtags to prevent a overload of links for a tweet
- * - removed the timestamp/link to prevent a overload of links for a tweet
- * - removed inline style for font-size
- * - included a .pot file and dutch .po/.mo files
 */
 
 require('wpacc-stormtwitter.php');
@@ -244,7 +224,7 @@ function wpacc_getTweets($count = 20, $username = false, $options = false) {
   if ($config['cache_expire'] < 1) $config['cache_expire'] = 3600;
   $config['directory'] = plugin_dir_path(__FILE__);
 
-  $obj = new StormTwitter($config);
+  $obj = new WPaccStormTwitter($config);
   $res = $obj->getTweets($count, $username, $options);
   update_option('wpacc_tdf_last_error',$obj->st_last_error);
   return $res;

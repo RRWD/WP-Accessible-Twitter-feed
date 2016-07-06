@@ -2,8 +2,8 @@
 Contributors: rianrietveld
 Tags: twitter, tweets, accessible, accessibility, WCAG, WCAG 2, a11y
 Requires at least: 3.0
-Tested up to: 4.3
-Stable tag: 1.1
+Tested up to: 4.6
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,13 @@ How to get the authorization Keys and Access Tokens:
 * copy/paste the Keys and Access Tokens in the WordPress menu item Settings -> Twitter Feed Auth
 
 == Changelog ==
+
+
+= 1.2 =
+
+* Check for already existing classes of oAuth added by other plugins. If so, the oAuth of this plugin will not be loaded.
+* Renamed class StormTwitter into WPaccStormTwitter to prevent name conflicts (thanks @markdeafmcguire for reporting)
+* adjusted heading structure in the admin settings page
 
 = 1.1 =
 
