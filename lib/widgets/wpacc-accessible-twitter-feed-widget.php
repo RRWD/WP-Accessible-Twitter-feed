@@ -1,12 +1,12 @@
 <?php
 /**
  * WP Accessible Twitter feed
- * Description: A widget with an Accessible twitter feed, based on the native Genesis Framework Widget by StudioPress. Works without Genesis Framework. Validates for WCAG 2.0
- *
-*/
+ * Description: A widget with an Accessible twitter feed, based on the native Genesis Framework Widget by StudioPress.
+ * Works without Genesis Framework. Validates for WCAG 2.0
+ */
 
-require('wpacc-stormtwitter.php');
-require('wpacc-twitter-oauth-settings.php');
+require 'wpacc-stormtwitter.php';
+require 'wpacc-twitter-oauth-settings.php';
 
 /**
  * WP-Accessible Latest Tweets widget class.
@@ -68,40 +68,40 @@ class WPACC_Latest_Tweets_Widget extends WP_Widget {
 
 		echo $before_widget;
 
-		if ( $instance['title'] )
+		if ( $instance['title'] ) {
 			echo $before_title . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $after_title;
+		}
 
 		echo '<ul>' . "\n";
 
-		$options['exclude_replies'] =  $instance['twitter_hide_replies'];
-		$options['include_rts'] =  $instance['twitter_include_rts'];
+		$options['exclude_replies'] = $instance['twitter_hide_replies'];
+		$options['include_rts']     = $instance['twitter_include_rts'];
 
-		$rawtweets = wpacc_getTweets($instance['twitter_num'], $instance['twitter_id'], $options);
+		$rawtweets = wpacc_getTweets( $instance['twitter_num'], $instance['twitter_id'], $options );
 
 		/** Build the tweets array */
 		$tweets = array();
 		foreach ( $rawtweets as $tweet ) {
 
-			$timeago = sprintf( __( 'about %s ago', 'wpacc' ), human_time_diff( strtotime( $tweet['created_at'] ) ) );
+			$timeago   = sprintf( __( 'about %s ago', 'wpacc' ), human_time_diff( strtotime( $tweet['created_at'] ) ) );
 			$timetweet = sprintf( '%s', esc_html( $timeago ) );
 			// $timetweet = strtotime( $tweet['created_at'] );
 			// $timetweet = date_i18n( 'j F Y', $timetweet, false )
-
 			/** Add tweet to array */
 			$tweets[] = '<li>' . wpacc_tweet_linkify( $tweet['text'] ) . ' - <span class="wpacc-tweet-time">' . $timetweet . '</span></li>' . "\n";
 		}
 
 		/** Just in case */
 		// $tweets = array_slice( (array) $tweets, 0, (int) $instance['twitter_num'] );
-
-		if ( $instance['follow_link_show'] && $instance['follow_link_text'] )
-			$tweets[] = '<li class="last"><a href="' . esc_url( 'http://twitter.com/'.$instance['twitter_id'] ).'"  class="ext">'. esc_html( $instance['follow_link_text'] ) .'</a></li>';
+		if ( $instance['follow_link_show'] && $instance['follow_link_text'] ) {
+			$tweets[] = '<li class="last"><a href="' . esc_url( 'http://twitter.com/' . $instance['twitter_id'] ) . '"  class="ext">' . esc_html( $instance['follow_link_text'] ) . '</a></li>';
+		}
 
 		$time = ( absint( $instance['twitter_duration'] ) * 60 );
 
-
-		foreach( $tweets as $tweet )
+		foreach ( $tweets as $tweet ) {
 			echo $tweet;
+		}
 
 		echo '</ul>' . "\n";
 
@@ -206,27 +206,28 @@ function wpacc_tweet_linkify( $text ) {
 	$text = preg_replace( "#(^|[\n ])((www|ftp)\.[^ \"\t\n\r< ]*)#", '\\1<a href="http://\\2" rel="nofollow">\\2</a>', $text );
 	$text = preg_replace( '/@(\w+)/', '<a href="http://www.twitter.com/\\1" rel="nofollow">@\\1</a>', $text );
 	// $text = preg_replace( '/#(\w+)/', '<a href="http://search.twitter.com/search?q=\\1" rel="nofollow">#\\1</a>', $text );
-
 	return $text;
 
 }
 
 
 /* implement getTweets */
-function wpacc_getTweets($count = 20, $username = false, $options = false) {
+function wpacc_getTweets( $count = 20, $username = false, $options = false ) {
 
-  $config['key'] = get_option('wpacc_tdf_consumer_key');
-  $config['secret'] = get_option('wpacc_tdf_consumer_secret');
-  $config['token'] = get_option('wpacc_tdf_access_token');
-  $config['token_secret'] = get_option('wpacc_tdf_access_token_secret');
-  $config['screenname'] = get_option('wpacc_tdf_user_timeline');
-  $config['cache_expire'] = intval(get_option('wpacc_tdf_cache_expire'));
-  if ($config['cache_expire'] < 1) $config['cache_expire'] = 3600;
-  $config['directory'] = plugin_dir_path(__FILE__);
+	$config['key']          = get_option( 'wpacc_tdf_consumer_key' );
+	$config['secret']       = get_option( 'wpacc_tdf_consumer_secret' );
+	$config['token']        = get_option( 'wpacc_tdf_access_token' );
+	$config['token_secret'] = get_option( 'wpacc_tdf_access_token_secret' );
+	$config['screenname']   = get_option( 'wpacc_tdf_user_timeline' );
+	$config['cache_expire'] = intval( get_option( 'wpacc_tdf_cache_expire' ) );
+	if ( $config['cache_expire'] < 1 ) {
+		$config['cache_expire'] = 3600;
+	}
+	$config['directory'] = plugin_dir_path( __FILE__ );
 
-  $obj = new WPaccStormTwitter($config);
-  $res = $obj->getTweets($count, $username, $options);
-  update_option('wpacc_tdf_last_error',$obj->st_last_error);
-  return $res;
+	$obj = new WPaccStormTwitter( $config );
+	$res = $obj->getTweets( $count, $username, $options );
+	update_option( 'wpacc_tdf_last_error', $obj->st_last_error );
+	return $res;
 
 }
