@@ -2,8 +2,8 @@
 Contributors: rianrietveld
 Tags: twitter, tweets, accessible, accessibility, WCAG, WCAG 2, a11y
 Requires at least: 3.0
-Tested up to: 4.6
-Stable tag: 1.2
+Tested up to: 4.9
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ This plugin adds an accessible Twitter feed widget, compliant with WCAG 2, requi
 
 == Description ==
 
-A widget with an accessible Twitter feed. Validates for WCAG 2.0. This plugin requires PHP5.
+A widget with an accessible Twitter feed. Validates for WCAG 2.0.
 
 == Installation ==
 
@@ -23,22 +23,27 @@ The Twitter feed authorization can be set in the menu item Setting -> Twitter Fe
 
 How to get the authorization Keys and Access Tokens:
 
-* log in with your Twitter account data at https://dev.twitter.com/apps
-* select "create a new application"
+* log in with your Twitter account data at [apps.twitter.com](https://apps.twitter.com/)
+* select "Create New App"
 * fill out your name/description/website
-* agree on the Rules Of The Road
+* agree on the Twitter Developer Agreement
 * select Create your Twitter application
 * select Create my access token
 * copy/paste the Keys and Access Tokens in the WordPress menu item Settings -> Twitter Feed Auth
 
 == Changelog ==
 
+= 2.0 =
+* Compatible with PHP 7
+* Code cleanup to comply with WordPress coding standards
+* Update Twitter Auth procedure
+* Fix typos
 
 = 1.2 =
 
 * Check for already existing classes of oAuth added by other plugins. If so, the oAuth of this plugin will not be loaded.
 * Renamed class StormTwitter into WPaccStormTwitter to prevent name conflicts (thanks @markdeafmcguire for reporting)
-* adjusted heading structure in the admin settings page
+* Adjusted heading structure in the admin settings page
 
 = 1.1 =
 
@@ -47,16 +52,16 @@ Removed [deprecated PHP style constructor](https://make.wordpress.org/core/2015/
 
 = 1.0 =
 
-* fixed bug Undefined index: twitter_duration
-* fixed bug Undefined index: twitter_include_rts
-* changed name plugin from WP Accessible into WP Accessible Twitter Feed
+* Fixed bug Undefined index: twitter_duration
+* Fixed bug Undefined index: twitter_include_rts
+* Changed name plugin from WP Accessible into WP Accessible Twitter Feed
 
 
 = 0.2 =
 
-* added Twitter API 1.1 authentication, integrating oAuth Twitter Feed for Developers by Storm Consultancy (Liam Gladdy) and the OAuth lib. You can find that at http://oauth.net
-* added time posted of the tweet
-* minor bug fixes
+* Added Twitter API 1.1 authentication, integrating oAuth Twitter Feed for Developers by Storm Consultancy (Liam Gladdy) and the OAuth lib. You can find that at http://oauth.net
+* Added time posted of the tweet
+* Minor bug fixes
 
 
 = 0.1 =
